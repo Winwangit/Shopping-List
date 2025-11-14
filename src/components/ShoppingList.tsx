@@ -15,12 +15,14 @@ function ShoppingList() {
 
   const addItem = () => {
     if (!name.trim() || quantity <= 0 || price <= 0) return;
+
     const newItem: Item = {
       id: Date.now(),
       name,
       quantity,
       price,
     };
+
     setItems([...items, newItem]);
     setName("");
     setQuantity(1);
@@ -39,6 +41,7 @@ function ShoppingList() {
   return (
     <div style={{ marginTop: "1rem", maxWidth: "500px" }}>
       <h2>Add Item</h2>
+
       <input
         type="text"
         placeholder="Item name"
@@ -46,27 +49,31 @@ function ShoppingList() {
         onChange={(e) => setName(e.target.value)}
         style={{ marginRight: "0.5rem", padding: "0.3rem" }}
       />
+
       <input
         type="number"
         placeholder="Quantity"
         value={quantity}
+        min={1}
         onChange={(e) => setQuantity(parseInt(e.target.value))}
         style={{ marginRight: "0.5rem", padding: "0.3rem", width: "70px" }}
-        min={1}
       />
+
       <input
         type="number"
         placeholder="Price"
         value={price}
+        min={0}
         onChange={(e) => setPrice(parseFloat(e.target.value))}
         style={{ marginRight: "0.5rem", padding: "0.3rem", width: "80px" }}
-        min={0}
       />
+
       <button onClick={addItem} style={{ padding: "0.3rem 0.5rem" }}>
         Add
       </button>
 
       <h2 style={{ marginTop: "1rem" }}>Shopping List</h2>
+
       {items.length === 0 ? (
         <p>No items added yet.</p>
       ) : (
@@ -80,6 +87,7 @@ function ShoppingList() {
               <th style={{ borderBottom: "1px solid #ccc" }}>Action</th>
             </tr>
           </thead>
+
           <tbody>
             {items.map((item) => (
               <tr key={item.id}>
@@ -101,7 +109,9 @@ function ShoppingList() {
         </table>
       )}
 
-      <h3 style={{ marginTop: "1rem" }}>Grand Total: ${grandTotal.toFixed(2)}</h3>
+      <h3 style={{ marginTop: "1rem" }}>
+        Grand Total: ${grandTotal.toFixed(2)}
+      </h3>
     </div>
   );
 }
